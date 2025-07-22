@@ -1,0 +1,7 @@
+*.ipfix
+*.gz
+*.dump
+*.json
+out
+warns
+errors

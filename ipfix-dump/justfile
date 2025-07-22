@@ -1,0 +1,25 @@
+#!/usr/bin/env -S just --justfile
+
+# vi: ft=justfile ts=4 sts=4 et
+
+container := "ipfixdump"
+file := "10.100.8.1.ipfix"
+
+exe := "pcap-to-ipfix"
+outdir := "testing_dir"
+
+# Show the list of possible commands.
+_list:
+    @just --list --list-prefix "····" --unsorted --justfile {{ justfile() }}
+
+build:
+    docker build -t {{container}} .
+
+interact:
+    docker run -it -v ./:/app {{container}}
+
+run:
+    docker run -it -v ./:/app {{container}} ipfix2json -i /app/{{file}} -o /app/{{file}}.json 2> errors
+
+dump:
+    docker run -it -v ./:/app {{container}} ipfixDump -i /app/{{file}} -o /app/{{file}}.dump 2> errors

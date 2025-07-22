@@ -10,10 +10,10 @@ pcap_file := "netflow.pcap"
 # Show the list of possible commands.
 run: build
     rm -rf {{outdir}}
-    rm -f ~/ipfix-dump/*.ipfix
+    rm -f ./ipfix-dump/*.ipfix
     mkdir {{outdir}}
     ./{{exe}} {{pcap_file}} {{outdir}}
-    cp {{outdir}}/*.ipfix ~/ipfix-dump/
+    cp {{outdir}}/*.ipfix ./ipfix-dump/
 
 _list:
     @just --list --list-prefix "····" --unsorted --justfile {{ justfile() }}
@@ -28,3 +28,13 @@ fmt:
     go fmt ./...
 
 rebuild: clean build run
+
+[working-directory: "ipfix-dump"]
+container:
+    # run just run from ipfix-dump working directory
+    @just build
+
+[working-directory: "ipfix-dump"]
+test:
+    # run just run from ipfix-dump working directory
+    @just run

@@ -1,0 +1,6 @@
+justfile
+*.ipfix
+*.ipfix.gz
+*.dump
+/out
+*.pcap
