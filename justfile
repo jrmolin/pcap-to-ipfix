@@ -13,7 +13,7 @@ run: build
     rm -f ./ipfix-dump/*.ipfix
     mkdir {{outdir}}
     ./{{exe}} {{pcap_file}} {{outdir}}
-    cp {{outdir}}/*.ipfix ./ipfix-dump/
+    cp {{outdir}}/*.ipfix ./ipfix-dump/test-file.ipfix
 
 _list:
     @just --list --list-prefix "····" --unsorted --justfile {{ justfile() }}

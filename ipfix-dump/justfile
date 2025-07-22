@@ -3,7 +3,7 @@
 # vi: ft=justfile ts=4 sts=4 et
 
 container := "ipfixdump"
-file := "10.100.8.1.ipfix"
+file := "test-file.ipfix"
 
 exe := "pcap-to-ipfix"
 outdir := "testing_dir"
