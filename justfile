@@ -4,8 +4,17 @@
 
 exe := "pcap-to-ipfix"
 outdir := "testing_dir"
+test_pcap_file := "test-netflow.pcap"
+pcap_file := "netflow.pcap"
 
 # Show the list of possible commands.
+run: build
+    rm -rf {{outdir}}
+    rm -f ~/ipfix-dump/*.ipfix
+    mkdir {{outdir}}
+    ./{{exe}} {{pcap_file}} {{outdir}}
+    cp {{outdir}}/*.ipfix ~/ipfix-dump/
+
 _list:
     @just --list --list-prefix "····" --unsorted --justfile {{ justfile() }}
 
@@ -18,9 +27,4 @@ build: clean
 fmt:
     go fmt ./...
 
-run:
-    rm -rf {{outdir}}
-    mkdir {{outdir}}
-    ./{{exe}} ./netflow.pcap {{outdir}}
-    cp {{outdir}}/*.ipfix ~/ipfix-dump/
-
+rebuild: clean build run
