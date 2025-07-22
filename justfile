@@ -1,6 +1,6 @@
 #!/usr/bin/env -S just --justfile
 
-# vi: ft=justfile ts=4 sts=4 et
+# vi: ft=just ts=4 sts=4 expandtab
 
 exe := "pcap-to-ipfix"
 outdir := "testing_dir"
